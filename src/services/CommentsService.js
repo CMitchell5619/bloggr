@@ -3,22 +3,13 @@ import { logger } from '../utils/Logger'
 import { sandboxApi } from './AxiosService'
 
 class CommentsService {
-  async getComments() {
+  async getComments(id) {
     try {
-      const res = await sandboxApi.get('api/comments')
+      const res = await sandboxApi.get(`api/blogs/${id}/comments`)
       console.log(res.data)
       AppState.comments = res.data
     } catch (err) {
       logger.error('HAVE YOU STARTED YOUR SERVER YET???', err)
-    }
-  }
-
-  async getComment(id) {
-    try {
-      const res = await sandboxApi.get('api/comments/' + id)
-      AppState.activeComment = res.data
-    } catch (error) {
-      console.error(error)
     }
   }
 

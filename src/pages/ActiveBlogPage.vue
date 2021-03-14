@@ -1,17 +1,20 @@
 <template>
   <div class="active-blog-page container">
-    <h1 class="text-center">
-      {{ state.blog.title }}
-    </h1>
-    <img class="img-fluid" :src="state.blog.imgUrl" alt="">
-    <p class="p-4">
-      {{ state.blog.body }}
-    </p>
-    {{ state.blog }}
-  </div>
-  <div class="container">
     <div class="row">
-      <Comment v-for="commentData in state.comments" :key="commentData.blog" :comment="commentData" />
+      <div class="col-12">
+        <h1 class="text-center">
+          {{ state.blog.title }}
+        </h1>
+        <img class="img-fluid" :src="state.blog.imgUrl" alt="">
+        <p class="p-4">
+          {{ state.blog.body }}
+        </p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6">
+        <CommentComponent v-for="commentData in state.comments" :key="commentData.id" :comment="commentData" />
+      </div>
     </div>
   </div>
 </template>
@@ -28,20 +31,17 @@ export default {
     const route = useRoute()
     const state = reactive({
       blog: computed(() => AppState.activeBlog),
-      comment: computed(() => AppState.comments)
+      comments: computed(() => AppState.comments)
     })
 
     onMounted(() => {
       console.log()
       blogsService.getBlog(route.params.id)
-      commentsService.getComments(route.params.blog)
+      commentsService.getComments(route.params.id)
     })
     return {
       state
     }
-  },
-  components: {
-    Comment
   }
 }
 </script>

@@ -10,7 +10,7 @@
 
 <script>
 export default {
-  name: 'Comment',
+  name: 'CommentComponent',
   props: {
     comment: Object
   },
