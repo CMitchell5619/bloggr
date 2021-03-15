@@ -22,6 +22,15 @@ class CommentsService {
       console.error(error)
     }
   }
+
+  async deleteComment(id) {
+    try {
+      await sandboxApi.delete('api/comments/' + id)
+      this.getComments()
+    } catch (error) {
+      console.error(error)
+    }
+  }
 }
 
 export const commentsService = new CommentsService()

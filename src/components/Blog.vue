@@ -1,22 +1,25 @@
 <template>
-  <div class="blog col-6 p-3">
+  <div class="blog col-6-lg col-12 p-2 mt-3">
+      <div class="card">
     <router-link :to="{name: 'ActiveBlog', params: {id: blog.id}}">
-      <div class="card" style="width: 45rem;">
-        <img class="card-img-top" :src="blog.imgUrl" alt="Card image cap">
-        <div class="card-body">
-          <h5 class="card-title">
+          <h3 class="card-title">
             {{ blog.title }}
-          </h5>
-          <p class="card-text">
+          </h3>
+    </router-link>
+        <span v-if="blog.imgUrl">
+        <img class="card-img-top img-fluid rounded" :src="blog.imgUrl" alt="Card image cap">
+        </span>
+        <div class="card-body">
+          <p class="card-text text-left">
             {{ blog.body }}
           </p>
-          <p class="card-text">
-            {{ }}
+          <span v-if="blog.creator">
+          <p class="card-text text-left text-muted">
+            {{ blog.creator.name }}
           </p>
-          <a href="#" class="btn btn-secondary">Go somewhere</a>
+          </span>
         </div>
       </div>
-    </router-link>
   </div>
 </template>
 
