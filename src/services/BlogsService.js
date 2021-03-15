@@ -50,6 +50,16 @@ class BlogsService {
       console.error(error)
     }
   }
+
+  // async editBlog(editedBlog) {
+  //   try {
+  //     const res = await sandboxApi.put('api/blogs/' + blog.id, editedBlog)
+  //     AppState.activeBlog = res.data
+  //     console.log(res)
+  //   } catch (error) {
+  //     console.log(error)
+  //   }
+  // }
 }
 
 export const blogsService = new BlogsService()

@@ -183,6 +183,7 @@ export default {
       },
       async createBlog() {
         const blogId = await blogsService.createBlog(state.newBlog)
+        // $('#create-modal').modal('hide')
         router.push({ name: 'ActiveBlog', params: { id: blogId } })
         state.newBlog = {}
       }

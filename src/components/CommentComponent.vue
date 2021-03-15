@@ -10,7 +10,9 @@
             {{ comment.creator.name }}
           </div>
           <div class="col-2">
-            <button class="btn btn-danger" @click="deleteComment">Deletto </button>
+            <button class="btn btn-danger" v-if="comment.creator.email == state.user.email" @click="deleteComment">
+              Deletto
+            </button>
           </div>
         </div>
       </div>
@@ -20,6 +22,7 @@
 
 <script>
 import { commentsService } from '../services/CommentsService'
+import { useRoute } from 'vue-router'
 import { reactive, computed } from 'vue'
 import { AppState } from '../AppState'
 
@@ -30,14 +33,16 @@ export default {
     comment: Object
   },
   setup(props) {
-     const state = reactive({
+    const route = useRoute()
+    const state = reactive({
       user: computed(() => AppState.user),
-      comment: computed(() => AppState.comments)
+      activeBlog: computed(() => AppState.activeBlog)
     })
     return {
       state,
       async deleteComment() {
         await commentsService.deleteComment(props.comment.id)
+        commentsService.getComments(route.params.id)
       }
     }
   },

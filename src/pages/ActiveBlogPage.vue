@@ -5,14 +5,15 @@
         <h3 class="text-center">
           {{ state.blog.title }}
         </h3>
-        <button type="button" class="btn btn-danger" @click="deleteBlog">
-          Delete Blog
-        </button>
-        <!-- <span v-if="state.blog.creator.name">
-        <h5>
-          {{state.blog.creator.name}}
-        </h5>
-        </span> -->
+        <span v-if="state.blog.creator">
+          <button type="button"
+                  class="btn btn-danger"
+                  @click="deleteBlog"
+                  v-if="state.blog.creator.email == state.user.email"
+          >
+            Delete Blog
+          </button>
+        </span>
         <span v-if="state.blog.imgUrl">
           <img class="img-fluid" :src="state.blog.imgUrl" alt="">
         </span>
@@ -34,7 +35,9 @@
             aria-describedby="helpId"
             v-model="state.newComment.body"
           />
-          <button class="btn btn-secondary" type="submit">Create Comment </button>
+          <button class="btn btn-secondary" type="submit">
+            Create Comment
+          </button>
         </form>
       </div>
     </div>
@@ -89,6 +92,8 @@ export default {
         router.push({ name: 'Home' })
       }
     }
+  },
+  components: {
   }
 }
 </script>
